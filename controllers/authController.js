@@ -19,7 +19,9 @@ const createSendToken = (user, statusCode, req, res) => {
   // CROSS-SITE SCRIPTING (XSS) ATTACKS: Store JWT in HTTPOnly cookies
   res.cookie('jwt', token, {
     expires: new Date(Date.now() * process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-    secure: req.secure || req.headers('x-forwarded-photo') === 'https' /* necessary for Heroku */,
+    secure:
+      req.secure ||
+      (typeof req.headers === 'function' && req.headers('x-forwarded-photo') === 'https') /* necessary for Heroku */,
     httpOnly: true,
   });
 
@@ -80,6 +82,7 @@ exports.logout = catchAsync(async (req, res, next) => {
 exports.protect = catchAsync(async (req, res, next) => {
   // Getting token and check if it's there
   let token;
+
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     token = req.headers.authorization.split(' ')[1];
   } else if (req.cookies.jwt) {

@@ -6,7 +6,7 @@ const router = express.Router({ mergeParams: true }); // merge params from redir
 
 router.use(authController.protect);
 
-router.get('/checkout-session/:tourId', authController.protect, bookingController.getCheckoutSession);
+router.get('/checkout-session/:tourId', bookingController.getCheckoutSession);
 
 router.use(authController.restrictTo('admin', 'lead-guide'));
 

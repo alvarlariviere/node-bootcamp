@@ -17,6 +17,7 @@ const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
+const bookingController = require('./controllers/bookingController');
 
 const app = express();
 
@@ -122,6 +123,9 @@ app.use(
     message: 'Too many requests from this IP, please try again in an hour!',
   })
 );
+
+// Stripe webhook, BEFORE body-parser, because Stripe needs the body as stream
+app.post('/webhook-checkout', express.raw(), bookingController.webhookCheckout);
 
 // DENIAL-OF-SERVICE (DOS) ATTACKS: Limit body payload (in body-parser)
 // Body parser, reading data from body into req.body
