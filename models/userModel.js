@@ -94,8 +94,6 @@ userSchema.methods.createPasswordResetToken = function () {
   // COMPROMISED DATABASE: Strongly encrypt passwords reset tokens (SHA 256)
   this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
 
-  // console.log({ resetToken }, this.passwordResetToken);
-
   // OTHER BEST PRACTICES: Create random password reset tokens with expirty dates
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 

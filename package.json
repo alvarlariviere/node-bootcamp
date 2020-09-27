@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "//-BASE": "========================================================================================================| BASE |",
-    "start": "run-s kill:port tab:server tab:client open:page",
+    "start": "node server.js",
+    "dev": "run-s kill:port tab:server tab:client open:page",
     "//-SERVER": "====================================================================================================| SERVER |",
     "tab:server": "ttab -t 'Server' npm run start:server",
     "start:server": "nodemon -e js,pug,css server.js",
