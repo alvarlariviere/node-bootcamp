@@ -7,8 +7,9 @@ const Review = require('../../models/reviewModel');
 
 dotenv.config({ path: './config.env' });
 
-const { DB_CONNECTION, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD } = process.env;
-const DB = `${DB_CONNECTION}://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`;
+const { DB_CONNECTION, DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD } = process.env;
+const QUERY_STRING_OPTIONS = 'retryWrites=true&w=majority';
+const DB = `${DB_CONNECTION}://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?${QUERY_STRING_OPTIONS}`;
 
 mongoose
   .connect(DB, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })

@@ -19,6 +19,9 @@ const bookingRouter = require('./routes/bookingRoutes');
 
 const app = express();
 
+// Compress response bodies for all requests
+app.use(compression({ threshold: 0 }));
+
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -130,9 +133,6 @@ app.use(
     whitelist: ['duration', 'ratingsAverage', 'ratingsQuantity', 'maxGroupSize', 'difficulty', 'price'],
   })
 );
-
-// Compress response bodies for all requests
-app.use(compression);
 
 // Test middleware
 // app.use((req, res, next) => {
