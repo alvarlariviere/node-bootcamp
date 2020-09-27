@@ -19,6 +19,8 @@ const bookingRouter = require('./routes/bookingRoutes');
 
 const app = express();
 
+app.enable('trust proxy'); // necessary for Heroku
+
 // Compress response bodies for all requests
 app.use(compression({ threshold: 0 }));
 
