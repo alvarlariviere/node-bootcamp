@@ -1,4 +1,11 @@
-.cache
-db_data
-node_modules
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/.cache
+/db_data
+
+# dependencies
+/node_modules
+
+# IDEs and editors
 *.env
