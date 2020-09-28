@@ -4,8 +4,10 @@ import { displayMap } from './mapbox';
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
+import { showAlert } from './alerts';
 
 // DOM ELEMENTS
+const alertMessage = document.querySelector('body').dataset.alert;
 const mapBox = document.getElementById('map');
 const loginForm = document.querySelector('.form--login');
 const logoutBtn = document.querySelector('.nav__el--logout');
@@ -22,6 +24,10 @@ const setButton = (btn, enable, textContent, toggleClass) => {
 };
 
 // DELEGATION
+if (alertMessage) {
+  showAlert('success', alertMessage, 20);
+}
+
 if (mapBox) {
   const locations = JSON.parse(mapBox.dataset.locations);
   displayMap(locations);
